@@ -65,7 +65,12 @@ body {
     padding: 12px;
     border-radius: 50px;
     cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
 
+.input-group button:hover {
+    background-color: rgba(150, 20, 236, 0.6); ;
 }
 
 .table__header .input-group {

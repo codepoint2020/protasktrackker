@@ -1,14 +1,22 @@
+//declare main variables
+
 let toggleTheme = document.querySelector(".toggle-theme")
 let tbody = document.querySelector("#tbody");
 let textBox = document.querySelector("#textBox");
-// const deleteTask = document.querySelector(".del");
-
-
 let addBtn = document.querySelector("#addBtn");
 
+//Preload task
 let tasks = [
    {
     text: "Wake up at 6:30 AM.",
+    completed: false
+   },
+   {
+    text: "Check emails",
+    completed: false
+   },
+   {
+    text: "Code Review",
     completed: false
    }
 
@@ -36,11 +44,11 @@ function removeTask(index) {
 }
 
 
-
 //render or list all tasks on the page
 function listAllTasks() {
     tbody.innerHTML = "";
-    // const isNightMode = document.querySelectorAll(".table").classList.contains("night");
+    //check if the .table class has a night class
+    const isNightMode = document.querySelector(".table").classList.contains("night");
     tasks.map( function(task, index) {
         const tr = document.createElement('tr');
 
@@ -59,19 +67,21 @@ function listAllTasks() {
     
         `;
 
-        // if (isNightMode) {
-        //     tr.querySelectorAll("td").forEach(function(td) {
-        //         td.classList.add("night");
-        //     })
-        // }
+        //ensures that td will also be in night mode if the variable isNightMode has a class of night
+        if (isNightMode) {
+            tr.querySelectorAll("td").forEach(function(td) {
+                td.classList.add("night");
+            })
+        }
     
         tbody.appendChild(tr);
 
         // Add an event listener to the checkbox to toggle task status
-        document.getElementById(`checkbox-${index}`).addEventListener('change', function() {
+        document.getElementById(`checkbox-${index}`).addEventListener('change', function(event) {
+            const checkbox = event.target; // Access the triggering checkbox directly via event.target
             const statusText = document.getElementById(`status-${index}`);
             task.completed = !task.completed;
-            if(this.checked) {
+            if(checkbox.checked) {
                 statusText.textContent = 'Completed';
                 statusText.classList.remove('in-progress');
                 statusText.classList.add('completed');
@@ -91,6 +101,7 @@ function listAllTasks() {
 listAllTasks();
 
 
+//Toogle theme feature
 toggleTheme.addEventListener("click", function() {
     if (document.querySelector(".sun").style.display == "none") {
         document.querySelector(".sun").style.display = "block";

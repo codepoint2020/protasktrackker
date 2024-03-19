@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <style>
+        table {
+            width: 230px;
+        }
+        table, th, td {
+            border: 1px solid #242424;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #delBtn {
+            background-color: rgb(231, 103, 103);
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add Task</h1>
+    <input type="text" id="myTextBox">
+    <button id="myBtn">Submit</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Task</th>
+            </tr>
+        </thead>
+        <tbody id="myTBody">
+
+        </tbody>
+    </table>
+    
+    
+
+    <script>
+
+        let myTextBox = document.querySelector("#myTextBox");
+        let myBtn = document.querySelector("#myBtn");
+        let myTBody = document.querySelector("#myTBody");
+
+        let tasks = [
+            {
+                text: "Wake up at 6:00am",
+                completed: false,
+            },
+            {
+                text: "Take a walk for 30min",
+                completed: false,
+            },
+            {
+                text: "Prepare breakfast",
+                completed: false,
+            },
+        ]
+
+        function populateData() {
+            tasks.map(function(task, index) {
+                let tr = document.createElement("tr");
+                tr.innerHTML = 
+
+                `
+                <td>${index + 1}</td>
+                <td>${task.text}</td>
+                <td><button id="delBtn" onClick="removeTask(${index})" type="button">Del</button></td>
+
+                `
+                myTBody.appendChild(tr);
+            })
+        }
+        populateData();
+
+
+        myBtn.addEventListener("click", function () {
+           
+            let newTask = myTextBox.value;
+            
+            if (newTask) {
+                myTBody.innerHTML = "";
+                tasks.push({text: newTask, completed: false})
+                populateData();
+                myTextBox.value = "";
+            } else {
+                alert("Please enter data");
+            }
+         
+        })
+
+        function removeTask(index) {
+            tasks.splice(index, 1);
+            myTBody.innerHTML = "";
+            populateData();
+        }
+        
+
+    </script>
+</body>
+</html>

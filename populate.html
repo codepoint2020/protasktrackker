@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Populate</title>
+    <style>
+        table {
+            width: 230px;
+        }
+        table, th, td {
+            border: 1px solid #242424;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Populate</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Task</th>
+            </tr>
+        </thead>
+        <tbody id="myTBody">
+
+        </tbody>
+    </table>
+    
+    
+
+    <script>
+        let myTBody = document.querySelector("#myTBody");
+
+        let tasks = [
+            {
+                text: "Wake up at 6:00am",
+                completed: false,
+            },
+            {
+                text: "Take a walk for 30min",
+                completed: false,
+            },
+            {
+                text: "Prepare breakfast",
+                completed: false,
+            },
+        ]
+
+        function populateData() {
+            tasks.map(function(task, index) {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>${index + 1}</td><td>${task.text}</td>`
+                myTBody.appendChild(tr);
+            })
+        }
+
+        populateData();
+    </script>
+</body>
+</html>
